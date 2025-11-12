@@ -28,12 +28,12 @@ export function SiteFooter() {
               Telegram
             </a>
             <a
-              href="https://base.org"
+              href="https://bscscan.com"
               target="_blank"
               rel="noopener noreferrer"
               className="hover:text-red-500 transition-colors"
             >
-              Base
+              BSC
             </a>
           </div>
         </div>
