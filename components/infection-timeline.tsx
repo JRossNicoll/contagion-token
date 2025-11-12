@@ -2,7 +2,7 @@
 
 import { Card } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Activity, Zap } from "lucide-react"
+import { Activity, Zap, ExternalLink } from "lucide-react"
 import { useEffect, useState } from "react"
 import { useWallet } from "@/hooks/use-wallet"
 
@@ -67,56 +67,84 @@ export function InfectionTimeline() {
   const getInfectionCount = (index: number) => timeline.length - index
 
   return (
-    <Card className="bg-white/5 backdrop-blur-xl border-white/10 p-6 shadow-xl">
-      <h3 className="text-xl font-bold text-white mb-6">Infection Timeline</h3>
-
-      <div className="space-y-3 max-h-[400px] overflow-y-auto pr-2 custom-scrollbar">
-        {loading ? (
-          <div className="text-center py-12">
-            <div className="w-12 h-12 border-4 border-red-500 border-t-transparent rounded-full animate-spin mx-auto mb-3" />
-            <p className="text-gray-400 text-sm">Loading infections...</p>
+    <Card className="bg-gradient-to-br from-white/5 to-white/[0.02] backdrop-blur-xl border border-white/10 shadow-2xl overflow-hidden">
+      <div className="p-6 border-b border-white/5 bg-gradient-to-r from-pink-500/5 to-purple-500/5">
+        <div className="flex items-center gap-3">
+          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-pink-500/20 to-purple-500/20 border border-pink-500/30 flex items-center justify-center">
+            <Activity className="w-5 h-5 text-pink-400" />
           </div>
-        ) : timeline.length > 0 ? (
-          timeline.map((entry, i) => {
-            const isChainReaction =
-              i > 0 && new Date(entry.created_at).getTime() - new Date(timeline[i - 1].created_at).getTime() < 300000
+          <div>
+            <h3 className="text-2xl font-bold text-white">Infection Timeline</h3>
+            <p className="text-xs text-gray-500 mt-0.5">Recent viral transmissions</p>
+          </div>
+        </div>
+      </div>
 
-            return (
-              <div
-                key={entry.transaction_hash}
-                className="flex items-center justify-between p-4 bg-black/40 backdrop-blur-sm border border-white/10 rounded-lg hover:border-red-500/30 hover:bg-white/5 transition-all"
-              >
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-center gap-2 mb-1">
-                    <span className="font-mono text-sm text-white font-medium truncate">
-                      {formatAddress(entry.to_address)}
-                    </span>
-                    {isChainReaction && (
-                      <Badge variant="destructive" className="text-xs font-mono px-2 py-0.5">
-                        <Zap className="w-3 h-3 mr-1" />
-                        CHAIN
-                      </Badge>
-                    )}
-                  </div>
-                  <div className="text-xs text-gray-500">{formatTimeAgo(entry.created_at)}</div>
-                </div>
+      <div className="p-6">
+        <div className="space-y-3 max-h-[500px] overflow-y-auto pr-2 custom-scrollbar">
+          {loading ? (
+            <div className="text-center py-16">
+              <div className="w-16 h-16 border-4 border-pink-500 border-t-transparent rounded-full animate-spin mx-auto mb-4" />
+              <p className="text-gray-400 text-sm">Scanning infection network...</p>
+            </div>
+          ) : timeline.length > 0 ? (
+            timeline.map((entry, i) => {
+              const isChainReaction =
+                i > 0 && new Date(entry.created_at).getTime() - new Date(timeline[i - 1].created_at).getTime() < 300000
 
-                <div className="flex items-center gap-3 ml-4">
-                  <div className="flex items-center gap-1.5">
-                    <span className="text-red-400 font-bold font-mono text-lg">{getInfectionCount(i)}</span>
-                    <span className="text-xs text-gray-500">infected</span>
+              return (
+                <div
+                  key={entry.transaction_hash}
+                  className="group relative p-4 bg-black/30 backdrop-blur-sm border border-white/10 rounded-xl hover:border-pink-500/30 hover:bg-white/5 transition-all duration-300"
+                >
+                  <div className="absolute inset-0 bg-gradient-to-r from-pink-500/0 via-pink-500/5 to-purple-500/0 opacity-0 group-hover:opacity-100 transition-opacity rounded-xl" />
+
+                  <div className="relative flex items-center justify-between">
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center gap-2 mb-2">
+                        <span className="font-mono text-sm text-white font-semibold truncate">
+                          {formatAddress(entry.to_address)}
+                        </span>
+                        {isChainReaction && (
+                          <Badge className="bg-gradient-to-r from-pink-500/20 to-purple-500/20 text-pink-300 border-pink-500/30 text-xs font-mono px-2 py-0.5">
+                            <Zap className="w-3 h-3 mr-1" />
+                            CHAIN
+                          </Badge>
+                        )}
+                        <a
+                          href={`https://bscscan.com/tx/${entry.transaction_hash}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="ml-auto opacity-0 group-hover:opacity-100 transition-opacity"
+                        >
+                          <ExternalLink className="w-4 h-4 text-gray-500 hover:text-pink-400 transition-colors" />
+                        </a>
+                      </div>
+                      <div className="text-xs text-gray-500 font-mono">{formatTimeAgo(entry.created_at)}</div>
+                    </div>
+
+                    <div className="flex items-center gap-4 ml-6">
+                      <div className="text-right">
+                        <div className="text-2xl font-bold font-mono bg-gradient-to-r from-pink-400 to-purple-400 bg-clip-text text-transparent">
+                          {getInfectionCount(i)}
+                        </div>
+                        <div className="text-xs text-gray-500 font-medium">infected</div>
+                      </div>
+                    </div>
                   </div>
                 </div>
+              )
+            })
+          ) : (
+            <div className="text-center py-20">
+              <div className="w-20 h-20 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-pink-500/10 to-purple-500/10 border border-pink-500/20 flex items-center justify-center">
+                <Activity className="w-10 h-10 text-pink-400/30" />
               </div>
-            )
-          })
-        ) : (
-          <div className="text-center py-16">
-            <Activity className="w-16 h-16 mx-auto mb-3 text-gray-700 opacity-30" />
-            <p className="text-gray-400 text-base mb-1">No infections yet</p>
-            <p className="text-gray-500 text-sm">Start spreading the virus!</p>
-          </div>
-        )}
+              <p className="text-gray-400 text-lg font-medium mb-2">No Infections Yet</p>
+              <p className="text-gray-600 text-sm">Start spreading to see your timeline</p>
+            </div>
+          )}
+        </div>
       </div>
     </Card>
   )

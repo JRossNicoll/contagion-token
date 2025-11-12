@@ -3,16 +3,22 @@ import { WalletStats } from "@/components/wallet-stats"
 import { InfectionTimeline } from "@/components/infection-timeline"
 import { RewardsTiers } from "@/components/rewards-tiers"
 import { BurnInterface } from "@/components/burn-interface"
-
 export default function DashboardPage() {
   return (
-    <main className="h-screen overflow-hidden bg-gradient-to-br from-black via-zinc-950 to-black flex flex-col">
-      <DashboardHeader />
-      <div className="flex-1 overflow-hidden">
-        <div className="h-full max-w-7xl mx-auto px-6 py-4 flex flex-col gap-4">
+    <main className="min-h-screen relative overflow-x-hidden bg-black">
+      {/* Animated candy gradient background */}
+      <div className="fixed inset-0 bg-gradient-to-br from-pink-950/20 via-purple-950/20 to-cyan-950/20 animate-gradient-shift" />
+      <div className="fixed inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(236,72,153,0.03),transparent_50%)]" />
+      <div className="fixed inset-0 bg-[radial-gradient(circle_at_80%_20%,rgba(168,85,247,0.04),transparent_40%)]" />
+      <div className="fixed inset-0 bg-[radial-gradient(circle_at_20%_80%,rgba(6,182,212,0.03),transparent_40%)]" />
+
+      <div className="relative z-10">
+        <DashboardHeader />
+
+        <div className="max-w-[1800px] mx-auto px-6 py-8 space-y-8">
           <WalletStats />
 
-          <div className="grid lg:grid-cols-[1.2fr,0.8fr] gap-4 flex-1 min-h-0">
+          <div className="grid lg:grid-cols-[1.4fr,1fr] gap-6">
             <InfectionTimeline />
             <BurnInterface />
           </div>

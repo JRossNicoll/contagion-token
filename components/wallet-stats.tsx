@@ -1,7 +1,7 @@
 "use client"
 
 import { Card } from "@/components/ui/card"
-import { Activity, TrendingUp, Flame, Trophy } from "lucide-react"
+import { Activity, TrendingUp, Flame, Trophy, Wallet } from "lucide-react"
 import { useEffect, useState } from "react"
 import { useWallet } from "@/hooks/use-wallet"
 
@@ -52,82 +52,113 @@ export function WalletStats() {
 
   if (!isConnected) {
     return (
-      <div className="text-center py-16">
-        <Activity className="w-16 h-16 mx-auto mb-4 text-gray-700" />
-        <p className="text-gray-400 text-lg mb-2">Connect your wallet to view infection stats</p>
-        <p className="text-gray-600 text-sm">Track your spread and earn rewards</p>
-      </div>
+      <Card className="bg-gradient-to-br from-white/5 to-white/[0.02] backdrop-blur-xl border border-white/10 shadow-2xl">
+        <div className="text-center py-24">
+          <div className="w-24 h-24 mx-auto mb-6 rounded-3xl bg-gradient-to-br from-pink-500/20 to-purple-500/20 border border-pink-500/30 flex items-center justify-center">
+            <Wallet className="w-12 h-12 text-pink-400" />
+          </div>
+          <h3 className="text-2xl font-bold text-white mb-3">Connect Your Wallet</h3>
+          <p className="text-gray-400 text-base max-w-md mx-auto leading-relaxed">
+            Link your wallet to view infection statistics, track spread metrics, and claim rewards
+          </p>
+        </div>
+      </Card>
     )
   }
 
   const displayBalance = Number.parseFloat(tokenBalance || "0")
 
   return (
-    <div>
-      <div className="mb-6">
-        <h2 className="text-3xl font-bold text-white mb-2">Infection Overview</h2>
-        <p className="text-sm text-gray-400 mb-4">Your contribution to the outbreak</p>
-        <div className="inline-flex items-center gap-3 px-5 py-3 rounded-xl bg-white/5 backdrop-blur-xl border border-white/10">
-          <span className="text-sm text-gray-400 font-medium">Balance:</span>
-          <span className="text-xl text-white font-mono font-semibold">
-            {displayBalance.toLocaleString(undefined, {
-              maximumFractionDigits: 2,
-              minimumFractionDigits: 2,
-            })}{" "}
-            <span className="text-red-400">RPLC</span>
-          </span>
+    <div className="space-y-6">
+      <div className="flex items-center justify-between">
+        <div>
+          <h2 className="text-4xl font-bold bg-gradient-to-r from-pink-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent mb-2">
+            Infection Overview
+          </h2>
+          <p className="text-sm text-gray-500">Your contribution to the viral ecosystem</p>
         </div>
+
+        <Card className="bg-gradient-to-br from-pink-500/10 via-purple-500/10 to-cyan-500/10 backdrop-blur-xl border border-white/10 shadow-xl px-8 py-4">
+          <div className="flex items-center gap-4">
+            <div className="text-right">
+              <div className="text-xs text-gray-400 font-medium mb-1">Total Balance</div>
+              <div className="text-3xl text-white font-mono font-bold">
+                {displayBalance.toLocaleString(undefined, {
+                  maximumFractionDigits: 2,
+                  minimumFractionDigits: 2,
+                })}
+              </div>
+            </div>
+            <div className="text-2xl font-bold bg-gradient-to-r from-pink-400 to-purple-400 bg-clip-text text-transparent">
+              RPLC
+            </div>
+          </div>
+        </Card>
       </div>
 
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <Card className="bg-white/5 backdrop-blur-xl border-white/10 p-6 hover:border-red-500/30 hover:bg-white/10 transition-all shadow-xl">
-          <div className="flex items-center gap-3 mb-4">
-            <div className="w-10 h-10 rounded-xl bg-red-500/20 border border-red-500/30 flex items-center justify-center">
-              <Activity className="w-5 h-5 text-red-400" />
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-5">
+        <Card className="group relative bg-gradient-to-br from-pink-500/10 to-pink-500/5 backdrop-blur-xl border border-pink-500/20 hover:border-pink-500/40 p-6 transition-all duration-300 shadow-xl hover:shadow-pink-500/20 hover:shadow-2xl hover:-translate-y-1">
+          <div className="absolute inset-0 bg-gradient-to-br from-pink-500/0 to-pink-500/10 opacity-0 group-hover:opacity-100 transition-opacity rounded-lg" />
+          <div className="relative">
+            <div className="flex items-center gap-3 mb-5">
+              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-pink-500/30 to-pink-600/30 border border-pink-500/50 flex items-center justify-center shadow-lg shadow-pink-500/20">
+                <Activity className="w-6 h-6 text-pink-300" />
+              </div>
+              <span className="text-xs text-gray-400 uppercase tracking-widest font-bold">Infected</span>
             </div>
-            <span className="text-xs text-gray-400 uppercase tracking-wider font-semibold">Infected</span>
+            <div className="text-5xl font-bold text-white mb-2 font-mono tabular-nums">
+              {loading ? "..." : stats.walletsInfected}
+            </div>
+            <div className="text-xs text-gray-500 font-medium">Total wallets infected</div>
           </div>
-          <div className="text-4xl font-bold text-white mb-2 font-mono">{loading ? "..." : stats.walletsInfected}</div>
-          <div className="text-xs text-gray-400 font-medium">Wallets infected</div>
         </Card>
 
-        <Card className="bg-white/5 backdrop-blur-xl border-white/10 p-6 hover:border-red-500/30 hover:bg-white/10 transition-all shadow-xl">
-          <div className="flex items-center gap-3 mb-4">
-            <div className="w-10 h-10 rounded-xl bg-red-500/20 border border-red-500/30 flex items-center justify-center">
-              <TrendingUp className="w-5 h-5 text-red-400" />
+        <Card className="group relative bg-gradient-to-br from-purple-500/10 to-purple-500/5 backdrop-blur-xl border border-purple-500/20 hover:border-purple-500/40 p-6 transition-all duration-300 shadow-xl hover:shadow-purple-500/20 hover:shadow-2xl hover:-translate-y-1">
+          <div className="absolute inset-0 bg-gradient-to-br from-purple-500/0 to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity rounded-lg" />
+          <div className="relative">
+            <div className="flex items-center gap-3 mb-5">
+              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-500/30 to-purple-600/30 border border-purple-500/50 flex items-center justify-center shadow-lg shadow-purple-500/20">
+                <TrendingUp className="w-6 h-6 text-purple-300" />
+              </div>
+              <span className="text-xs text-gray-400 uppercase tracking-widest font-bold">Spread Rate</span>
             </div>
-            <span className="text-xs text-gray-400 uppercase tracking-wider font-semibold">Rate</span>
+            <div className="text-5xl font-bold text-white mb-2 font-mono tabular-nums">
+              {loading ? "..." : `${stats.spreadRate.toFixed(1)}×`}
+            </div>
+            <div className="text-xs text-gray-500 font-medium">Infection multiplier</div>
           </div>
-          <div className="text-4xl font-bold text-white mb-2 font-mono">
-            {loading ? "..." : `${stats.spreadRate.toFixed(1)}x`}
-          </div>
-          <div className="text-xs text-gray-400 font-medium">Spread Rate</div>
         </Card>
 
-        <Card className="bg-white/5 backdrop-blur-xl border-white/10 p-6 hover:border-orange-500/30 hover:bg-white/10 transition-all shadow-xl">
-          <div className="flex items-center gap-3 mb-4">
-            <div className="w-10 h-10 rounded-xl bg-orange-500/20 border border-orange-500/30 flex items-center justify-center">
-              <Flame className="w-5 h-5 text-orange-400" />
+        <Card className="group relative bg-gradient-to-br from-orange-500/10 to-orange-500/5 backdrop-blur-xl border border-orange-500/20 hover:border-orange-500/40 p-6 transition-all duration-300 shadow-xl hover:shadow-orange-500/20 hover:shadow-2xl hover:-translate-y-1">
+          <div className="absolute inset-0 bg-gradient-to-br from-orange-500/0 to-orange-500/10 opacity-0 group-hover:opacity-100 transition-opacity rounded-lg" />
+          <div className="relative">
+            <div className="flex items-center gap-3 mb-5">
+              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-orange-500/30 to-orange-600/30 border border-orange-500/50 flex items-center justify-center shadow-lg shadow-orange-500/20">
+                <Flame className="w-6 h-6 text-orange-300" />
+              </div>
+              <span className="text-xs text-gray-400 uppercase tracking-widest font-bold">Burned</span>
             </div>
-            <span className="text-xs text-gray-400 uppercase tracking-wider font-semibold">Burned</span>
+            <div className="text-5xl font-bold text-white mb-2 font-mono tabular-nums">
+              {loading ? "..." : stats.tokensBurned.toLocaleString()}
+            </div>
+            <div className="text-xs text-gray-500 font-medium">Tokens eliminated</div>
           </div>
-          <div className="text-4xl font-bold text-white mb-2 font-mono">
-            {loading ? "..." : stats.tokensBurned.toLocaleString()}
-          </div>
-          <div className="text-xs text-gray-400 font-medium">Tokens Burned</div>
         </Card>
 
-        <Card className="bg-white/5 backdrop-blur-xl border-white/10 p-6 hover:border-yellow-500/30 hover:bg-white/10 transition-all shadow-xl">
-          <div className="flex items-center gap-3 mb-4">
-            <div className="w-10 h-10 rounded-xl bg-yellow-500/20 border border-yellow-500/30 flex items-center justify-center">
-              <Trophy className="w-5 h-5 text-yellow-400" />
+        <Card className="group relative bg-gradient-to-br from-cyan-500/10 to-cyan-500/5 backdrop-blur-xl border border-cyan-500/20 hover:border-cyan-500/40 p-6 transition-all duration-300 shadow-xl hover:shadow-cyan-500/20 hover:shadow-2xl hover:-translate-y-1">
+          <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/0 to-cyan-500/10 opacity-0 group-hover:opacity-100 transition-opacity rounded-lg" />
+          <div className="relative">
+            <div className="flex items-center gap-3 mb-5">
+              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-cyan-500/30 to-cyan-600/30 border border-cyan-500/50 flex items-center justify-center shadow-lg shadow-cyan-500/20">
+                <Trophy className="w-6 h-6 text-cyan-300" />
+              </div>
+              <span className="text-xs text-gray-400 uppercase tracking-widest font-bold">Global Rank</span>
             </div>
-            <span className="text-xs text-gray-400 uppercase tracking-wider font-semibold">Rank</span>
+            <div className="text-5xl font-bold text-white mb-2 font-mono tabular-nums">
+              {loading ? "..." : stats.globalRank > 0 ? `#${stats.globalRank}` : "#—"}
+            </div>
+            <div className="text-xs text-gray-500 font-medium">Leaderboard position</div>
           </div>
-          <div className="text-4xl font-bold text-white mb-2 font-mono">
-            {loading ? "..." : stats.globalRank > 0 ? `#${stats.globalRank}` : "#0"}
-          </div>
-          <div className="text-xs text-gray-400 font-medium">Global Rank</div>
         </Card>
       </div>
     </div>
