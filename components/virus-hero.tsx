@@ -93,7 +93,7 @@ export function VirusHero() {
         {/* Title */}
         <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold mb-4 text-balance tracking-tight">
           <span className="bg-gradient-to-b from-white via-white to-red-400 bg-clip-text text-transparent drop-shadow-[0_0_30px_rgba(220,38,38,0.3)]">
-            THE CONTAGION
+            THE REPLICATOR
           </span>
         </h1>
 

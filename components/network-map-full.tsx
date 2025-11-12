@@ -431,17 +431,17 @@ export function NetworkMapFull() {
 
                   <div className="flex justify-between items-center py-3 border-b border-white/10">
                     <span className="text-gray-400">Total Balance</span>
-                    <span className="text-red-400 font-bold">{formatBalance(holderDetails.balance)} CONTAGION</span>
+                    <span className="text-red-400 font-bold">{formatBalance(holderDetails.balance)} RPLC</span>
                   </div>
 
                   <div className="flex justify-between items-center py-3 border-b border-white/10">
                     <span className="text-gray-400">Base Balance</span>
-                    <span className="text-white">{formatBalance(holderDetails.base_balance)} CONTAGION</span>
+                    <span className="text-white">{formatBalance(holderDetails.base_balance)} RPLC</span>
                   </div>
 
                   <div className="flex justify-between items-center py-3 border-b border-white/10">
                     <span className="text-gray-400">Reflection Balance</span>
-                    <span className="text-green-400">{formatBalance(holderDetails.reflection_balance)} CONTAGION</span>
+                    <span className="text-green-400">{formatBalance(holderDetails.reflection_balance)} RPLC</span>
                   </div>
 
                   <div className="flex justify-between items-center py-3 border-b border-white/10">

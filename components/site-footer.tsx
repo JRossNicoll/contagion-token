@@ -5,7 +5,7 @@ export function SiteFooter() {
         <div className="flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-gray-500">
           <div className="flex items-center gap-1">
             <span className="text-red-500">©</span>
-            <span>2025 The Contagion</span>
+            <span>2025 The Replicator</span>
             <span className="hidden sm:inline">•</span>
             <span className="hidden sm:inline">All rights reserved</span>
           </div>

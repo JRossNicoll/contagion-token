@@ -247,54 +247,22 @@ export function VirusMap({ tokenAddress, isPaused = false, zoom = 1, onRefresh }
             setNodes(holderNodes)
             setLoading(false)
           } else {
-            console.log("[v0] No valid holder nodes, generating mock nodes")
-            generateMockNodes()
+            console.error("[v0] No valid holder data available")
+            setLoading(false)
           }
         } else {
-          console.log("[v0] No holders data, generating mock nodes")
-          generateMockNodes()
+          console.error("[v0] No holders data from API")
+          setLoading(false)
         }
       } catch (error) {
         console.error("[v0] Error loading holders:", error)
-        generateMockNodes()
+        setLoading(false)
       }
-    }
-
-    const generateMockNodes = () => {
-      const rect = canvas.getBoundingClientRect()
-      if (rect.width === 0 || rect.height === 0) {
-        setTimeout(generateMockNodes, 100)
-        return
-      }
-
-      const nodeCount = isMobile ? 40 : 80
-      const initialNodes: Node[] = Array.from({ length: nodeCount }, (_, i) => {
-        const infected = Math.floor(Math.random() * 80)
-        const tier = infected > 50 ? "super" : infected > 25 ? "active" : infected > 10 ? "carrier" : "infected"
-
-        return {
-          id: `node-${i}`,
-          x: Math.random() * rect.width,
-          y: Math.random() * rect.height,
-          radius: Math.min(Math.max(infected * 1.5 + 5, 5), 25),
-          connections: infected,
-          address: `0x${Math.random().toString(16).substring(2, 10)}...${Math.random().toString(16).substring(2, 6)}`,
-          infected,
-          balance: "0",
-          vx: (Math.random() - 0.5) * 0.4,
-          vy: (Math.random() - 0.5) * 0.4,
-          selected: false,
-          tier,
-          pulsePhase: Math.random() * Math.PI * 2,
-        }
-      })
-
-      setNodes(initialNodes)
-      setLoading(false)
     }
 
     if (!tokenAddress) {
-      generateMockNodes()
+      console.log("[v0] No token address provided")
+      setLoading(false)
     } else {
       fetchHolders()
     }
@@ -575,6 +543,16 @@ export function VirusMap({ tokenAddress, isPaused = false, zoom = 1, onRefresh }
           <div className="text-center space-y-4">
             <div className="w-16 h-16 border-4 border-red-500 border-t-transparent rounded-full animate-spin mx-auto" />
             <div className="text-red-500 font-mono text-sm">LOADING OUTBREAK DATA...</div>
+          </div>
+        </div>
+      )}
+
+      {!loading && nodes.length === 0 && (
+        <div className="absolute inset-0 flex items-center justify-center bg-black/80 backdrop-blur-sm">
+          <div className="text-center space-y-4">
+            <div className="text-red-500/50 text-6xl">🦠</div>
+            <div className="text-red-500 font-mono text-lg font-bold">NO OUTBREAK DATA</div>
+            <div className="text-gray-400 text-sm">Connect to database to view real wallet data</div>
           </div>
         </div>
       )}

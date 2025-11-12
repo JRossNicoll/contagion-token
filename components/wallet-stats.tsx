@@ -74,7 +74,7 @@ export function WalletStats() {
               maximumFractionDigits: 2,
               minimumFractionDigits: 2,
             })}{" "}
-            <span className="text-red-400">CONTAGION</span>
+            <span className="text-red-400">RPLC</span>
           </span>
         </div>
       </div>

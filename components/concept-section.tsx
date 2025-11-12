@@ -105,7 +105,7 @@ export function ConceptSection() {
                 Network Mapping
               </h3>
               <p className="text-gray-400 text-xs leading-relaxed font-light text-center">
-                Watch the contagion spread in real-time. Larger nodes represent super-spreaders who infected more
+                Watch the replication spread in real-time. Larger nodes represent super-spreaders who infected more
                 wallets.
               </p>
             </div>

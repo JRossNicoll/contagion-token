@@ -27,7 +27,7 @@ export function ClaimReflectionsButton({ virtualBalance }: { virtualBalance: str
       if (data.success) {
         toast({
           title: "Reflections Claimed!",
-          description: `Successfully claimed ${(Number(data.amount) / 1e9).toLocaleString()} CONTAGION tokens`,
+          description: `Successfully claimed ${(Number(data.amount) / 1e9).toLocaleString()} RPLC tokens`,
         })
       } else {
         throw new Error(data.error)
@@ -55,7 +55,7 @@ export function ClaimReflectionsButton({ virtualBalance }: { virtualBalance: str
           Claiming...
         </>
       ) : (
-        `Claim ${balance.toLocaleString()} CONTAGION Reflections`
+        `Claim ${balance.toLocaleString()} RPLC Reflections`
       )}
     </Button>
   )

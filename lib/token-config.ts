@@ -1,8 +1,8 @@
 export const TOKEN_CONFIG = {
   address: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS || "0x3d83CB630C3D5E53C9558d39F2e35e94E3609A47",
   decimals: 9,
-  name: "Contagion Token",
-  symbol: "CONTAGION",
+  name: "Replicator Token",
+  symbol: "RPLC",
   abi: [
     {
       inputs: [{ internalType: "address", name: "account", type: "address" }],
