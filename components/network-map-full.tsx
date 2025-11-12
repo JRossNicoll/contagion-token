@@ -48,9 +48,11 @@ export function NetworkMapFull() {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
+    console.log("[v0] Fetching real infection chain data from API...")
     fetch("/api/infection-chain?limit=200")
       .then((res) => res.json())
       .then((data) => {
+        console.log("[v0] Received real infection data:", data.infections?.length, "infections")
         const nodeMap = new Map<string, Node>()
         const linkList: NetworkLink[] = []
 
@@ -59,6 +61,11 @@ export function NetworkMapFull() {
           const infectorAddr = infection.infected_by_wallet?.toLowerCase()
 
           if (!infectedAddr) return
+
+          console.log("[v0] Processing real infection:", {
+            infected: infectedAddr.slice(0, 8) + "...",
+            infectedBy: infectorAddr ? infectorAddr.slice(0, 8) + "..." : "None (Patient Zero)",
+          })
 
           // Add infected wallet as node
           if (!nodeMap.has(infectedAddr)) {
@@ -104,6 +111,13 @@ export function NetworkMapFull() {
         })
 
         const nodeArray = Array.from(nodeMap.values())
+        console.log(
+          "[v0] Built network with",
+          nodeArray.length,
+          "real wallet nodes and",
+          linkList.length,
+          "real infection links",
+        )
         setNodes(nodeArray)
         setLinks(linkList)
         setLoading(false)
@@ -115,11 +129,13 @@ export function NetworkMapFull() {
   }, [])
 
   const handleNodeClick = async (node: Node) => {
+    console.log("[v0] Clicked on real wallet:", node.id)
     setSelectedNode(node)
     setLoadingDetails(true)
     setInfectedWallets([])
 
     try {
+      console.log("[v0] Fetching real data for wallet:", node.id.slice(0, 8) + "...")
       const [statsRes, holderRes, infectionsRes] = await Promise.all([
         fetch(`/api/user-stats?address=${node.id}`),
         fetch(`/api/holders?limit=1000`),
@@ -130,10 +146,18 @@ export function NetworkMapFull() {
       const holderData = await holderRes.json()
       const infectionsData = await infectionsRes.json()
 
+      console.log("[v0] Real wallet stats:", {
+        address: node.id.slice(0, 8) + "...",
+        infections: statsData.infections_count,
+        rank: statsData.rank,
+      })
+
       const holder = holderData.holders?.find((h: any) => h.holder_address.toLowerCase() === node.id)
 
       const infected =
         infectionsData.infections?.filter((inf: any) => inf.infector_address?.toLowerCase() === node.id) || []
+
+      console.log("[v0] Found", infected.length, "real wallets infected by this wallet")
 
       setInfectedWallets(infected)
 
