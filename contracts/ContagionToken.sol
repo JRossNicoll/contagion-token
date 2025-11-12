@@ -20,11 +20,6 @@ contract ContagionToken is ERC20, Ownable, ReentrancyGuard {
     uint256 public gasTaxRate = 1; // 1%
     uint256 public constant TAX_DENOMINATOR = 100;
     
-    bool public antiSniperActive = true;
-    uint256 public antiSniperTaxRate = 10; // 10% buy AND sell during anti-sniper period
-    uint256 public antiSniperTransactionLimit = 25; // First 25 transactions
-    uint256 public transactionCount = 0;
-    
     // Transaction Limits
     uint256 public maxTransactionAmount = (TOTAL_SUPPLY * 2) / 100; // 2%
     uint256 public maxWalletAmount = (TOTAL_SUPPLY * 2) / 100; // 2%
@@ -63,8 +58,6 @@ contract ContagionToken is ERC20, Ownable, ReentrancyGuard {
     event ProxyWalletsSet(address indexed holder, address[MAX_PROXIES] proxies);
     event ReflectionsDistributed(uint256 indexed snapshotId, uint256 totalAmount, uint256 recipientCount);
     event TaxRatesUpdated(uint256 reflectionTax, uint256 gasTax);
-    event AntiSniperConfigured(bool active, uint256 taxRate, uint256 transactionLimit);
-    event AntiSniperDeactivated(uint256 finalTransactionCount);
     event LimitsRemoved();
     event PoolAddressUpdated(string poolType, address newAddress);
     
@@ -150,18 +143,6 @@ contract ContagionToken is ERC20, Ownable, ReentrancyGuard {
         require(to != address(0), "Transfer to zero address");
         require(amount > 0, "Transfer amount must be greater than zero");
         
-        bool isTaxableTransaction = !isExcludedFromTax[from] && !isExcludedFromTax[to] && (from == dexRouter || to == dexRouter);
-        
-        if (isTaxableTransaction && antiSniperActive) {
-            transactionCount++;
-            
-            // Auto-disable anti-sniper after limit reached
-            if (transactionCount >= antiSniperTransactionLimit) {
-                antiSniperActive = false;
-                emit AntiSniperDeactivated(transactionCount);
-            }
-        }
-        
         // Anti-bot: check sells per block
         if (from != owner() && to == dexRouter) {
             uint256 currentBlock = block.number;
@@ -181,23 +162,12 @@ contract ContagionToken is ERC20, Ownable, ReentrancyGuard {
         
         uint256 transferAmount = amount;
         
-        if (isTaxableTransaction) {
-            uint256 reflectionTax;
-            uint256 gasTax;
-            
-            // Use anti-sniper tax rate if active
-            if (antiSniperActive) {
-                uint256 totalTax = (amount * antiSniperTaxRate) / TAX_DENOMINATOR;
-                // Split 80/20 during anti-sniper (8% reflection, 2% gas for 10% total)
-                reflectionTax = (totalTax * 80) / 100;
-                gasTax = totalTax - reflectionTax;
-            } else {
-                // Normal tax rates
-                reflectionTax = (amount * reflectionTaxRate) / TAX_DENOMINATOR;
-                gasTax = (amount * gasTaxRate) / TAX_DENOMINATOR;
-            }
-            
+        // Apply taxes
+        if (!isExcludedFromTax[from] && !isExcludedFromTax[to] && (from == dexRouter || to == dexRouter)) {
+            uint256 reflectionTax = (amount * reflectionTaxRate) / TAX_DENOMINATOR;
+            uint256 gasTax = (amount * gasTaxRate) / TAX_DENOMINATOR;
             uint256 totalTax = reflectionTax + gasTax;
+            
             transferAmount = amount - totalTax;
             
             uint256 fromBaseBalance = _baseBalances[from];
@@ -360,45 +330,6 @@ contract ContagionToken is ERC20, Ownable, ReentrancyGuard {
     
     function excludeFromLimits(address wallet, bool excluded) external onlyOwner {
         isExcludedFromLimits[wallet] = excluded;
-    }
-    
-    
-    /**
-     * @notice Configure anti-sniper protection
-     * @param active Enable or disable anti-sniper
-     * @param taxRate Tax rate during anti-sniper period (percentage)
-     * @param txLimit Number of transactions before auto-disable
-     */
-    function setAntiSniper(bool active, uint256 taxRate, uint256 txLimit) external onlyOwner {
-        require(taxRate <= 50, "Tax rate too high"); // Max 50% protection
-        require(txLimit > 0, "Transaction limit must be positive");
-        
-        antiSniperActive = active;
-        antiSniperTaxRate = taxRate;
-        antiSniperTransactionLimit = txLimit;
-        
-        emit AntiSniperConfigured(active, taxRate, txLimit);
-    }
-    
-    /**
-     * @notice Get current applicable tax rate
-     * @return Current tax rate percentage
-     */
-    function getCurrentTaxRate() external view returns (uint256) {
-        if (antiSniperActive) {
-            return antiSniperTaxRate;
-        }
-        return reflectionTaxRate + gasTaxRate;
-    }
-    
-    /**
-     * @notice Get anti-sniper status
-     * @return active Whether anti-sniper is active
-     * @return txCount Current transaction count
-     * @return txLimit Transaction limit before auto-disable
-     */
-    function getAntiSniperStatus() external view returns (bool active, uint256 txCount, uint256 txLimit) {
-        return (antiSniperActive, transactionCount, antiSniperTransactionLimit);
     }
     
     // Emergency Functions

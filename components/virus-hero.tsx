@@ -29,17 +29,19 @@ export function VirusHero() {
         style={{ animationDelay: "2s" }}
       />
 
-      <div className="relative z-10 max-w-5xl mx-auto px-4 md:px-6 text-center">
-        <div className="flex items-center justify-center gap-2 mb-12 pt-20">
+      <div className="relative z-10 max-w-4xl mx-auto px-4 md:px-6 text-center">
+        {/* Social Links */}
+        <div className="flex items-center justify-center gap-3 mb-8 pt-16">
           <a
             href="https://twitter.com"
             target="_blank"
             rel="noopener noreferrer"
-            className="group relative flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/5 backdrop-blur-xl transition-all duration-300 hover:border-red-500/50 hover:bg-red-500/10 hover:scale-110"
+            className="group relative flex h-10 w-10 items-center justify-center rounded-lg border border-red-500/20 bg-gradient-to-br from-red-950/30 to-red-900/20 backdrop-blur-md transition-all duration-300 hover:border-red-500/50 hover:bg-gradient-to-br hover:from-red-950/50 hover:to-red-900/30 hover:shadow-[0_0_20px_rgba(220,38,38,0.3)] hover:scale-110"
             aria-label="X (Twitter)"
           >
+            <div className="absolute inset-0 rounded-lg bg-gradient-to-br from-red-500/0 to-red-500/0 group-hover:from-red-500/10 group-hover:to-red-500/5 transition-all duration-300" />
             <svg
-              className="h-3.5 w-3.5 text-gray-400 transition-colors duration-300 group-hover:text-red-400"
+              className="relative h-4 w-4 text-red-400 transition-all duration-300 group-hover:text-red-300"
               fill="currentColor"
               viewBox="0 0 24 24"
             >
@@ -50,11 +52,12 @@ export function VirusHero() {
             href="https://t.me"
             target="_blank"
             rel="noopener noreferrer"
-            className="group relative flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/5 backdrop-blur-xl transition-all duration-300 hover:border-red-500/50 hover:bg-red-500/10 hover:scale-110"
+            className="group relative flex h-10 w-10 items-center justify-center rounded-lg border border-red-500/20 bg-gradient-to-br from-red-950/30 to-red-900/20 backdrop-blur-md transition-all duration-300 hover:border-red-500/50 hover:bg-gradient-to-br hover:from-red-950/50 hover:to-red-900/30 hover:shadow-[0_0_20px_rgba(220,38,38,0.3)] hover:scale-110"
             aria-label="Telegram"
           >
+            <div className="absolute inset-0 rounded-lg bg-gradient-to-br from-red-500/0 to-red-500/0 group-hover:from-red-500/10 group-hover:to-red-500/5 transition-all duration-300" />
             <svg
-              className="h-3.5 w-3.5 text-gray-400 transition-colors duration-300 group-hover:text-red-400"
+              className="relative h-4 w-4 text-red-400 transition-all duration-300 group-hover:text-red-300"
               fill="currentColor"
               viewBox="0 0 24 24"
             >
@@ -62,29 +65,15 @@ export function VirusHero() {
             </svg>
           </a>
           <a
-            href="https://basescan.org"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group relative flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/5 backdrop-blur-xl transition-all duration-300 hover:border-red-500/50 hover:bg-red-500/10 hover:scale-110"
-            aria-label="Base Chain"
-          >
-            <svg
-              className="h-3.5 w-3.5 text-gray-400 transition-colors duration-300 group-hover:text-red-400"
-              fill="currentColor"
-              viewBox="0 0 111 111"
-            >
-              <path d="M54.921 110.034C85.359 110.034 110.034 85.402 110.034 55.017C110.034 24.6319 85.359 0 54.921 0C26.0432 0 2.35281 22.1714 0 50.3923H72.8467V59.6416H3.9565e-07C2.35281 87.8625 26.0432 110.034 54.921 110.034Z" />
-            </svg>
-          </a>
-          <a
             href="https://bscscan.com"
             target="_blank"
             rel="noopener noreferrer"
-            className="group relative flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/5 backdrop-blur-xl transition-all duration-300 hover:border-red-500/50 hover:bg-red-500/10 hover:scale-110"
-            aria-label="BSC Chain"
+            className="group relative flex h-10 w-10 items-center justify-center rounded-lg border border-red-500/20 bg-gradient-to-br from-red-950/30 to-red-900/20 backdrop-blur-md transition-all duration-300 hover:border-red-500/50 hover:bg-gradient-to-br hover:from-red-950/50 hover:to-red-900/30 hover:shadow-[0_0_20px_rgba(220,38,38,0.3)] hover:scale-110"
+            aria-label="Binance Smart Chain"
           >
+            <div className="absolute inset-0 rounded-lg bg-gradient-to-br from-red-500/0 to-red-500/0 group-hover:from-red-500/10 group-hover:to-red-500/5 transition-all duration-300" />
             <svg
-              className="h-4 w-4 text-gray-400 transition-colors duration-300 group-hover:text-red-400"
+              className="relative h-5 w-5 text-red-400 transition-all duration-300 group-hover:text-red-300"
               fill="currentColor"
               viewBox="0 0 126.61 126.61"
             >
@@ -101,52 +90,82 @@ export function VirusHero() {
           </a>
         </div>
 
-        <div className="mb-10">
-          <h1 className="text-5xl sm:text-6xl md:text-8xl font-bold mb-6 text-balance tracking-tight leading-none">
-            <span className="bg-gradient-to-b from-white via-white to-white/80 bg-clip-text text-transparent">
-              THE CONTAGION
-            </span>
-          </h1>
+        {/* Title */}
+        <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold mb-4 text-balance tracking-tight">
+          <span className="bg-gradient-to-b from-white via-white to-red-400 bg-clip-text text-transparent drop-shadow-[0_0_30px_rgba(220,38,38,0.3)]">
+            THE CONTAGION
+          </span>
+        </h1>
 
-          <p className="text-lg sm:text-xl md:text-2xl text-gray-400 mb-4 max-w-3xl mx-auto text-balance font-light leading-relaxed">
-            A token that spreads itself. Unstoppable. Untraceable. Inevitable.
-          </p>
+        <p className="text-base sm:text-lg md:text-xl text-gray-300 mb-3 max-w-2xl mx-auto text-balance font-light">
+          A token that spreads itself. Unstoppable. Untraceable. Inevitable.
+        </p>
 
-          <p className="text-sm text-gray-500 max-w-2xl mx-auto leading-relaxed">
-            Every transaction infects new wallets. Every holder becomes a carrier. Watch the virus spread across the
-            blockchain in real-time.
-          </p>
-        </div>
+        <p className="text-xs sm:text-sm text-gray-500 mb-8 max-w-xl mx-auto font-mono px-4 leading-relaxed">
+          Every transaction infects new wallets. Every holder becomes a carrier. Watch the virus spread across the
+          blockchain in real-time.
+        </p>
 
-        <div className="flex flex-col sm:flex-row gap-3 justify-center px-4 mb-16">
+        {/* CTA Buttons */}
+        <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center px-4 mb-12">
           <Link href="/map" className="w-full sm:w-auto">
             <Button
               size="lg"
-              className="group relative w-full sm:w-[200px] h-[52px] bg-white text-black font-semibold text-base rounded-full transition-all duration-300 hover:scale-105 hover:shadow-[0_0_40px_rgba(255,255,255,0.3)] overflow-hidden"
+              className="group relative w-full sm:w-[180px] h-10 bg-gradient-to-r from-red-600 via-red-500 to-red-600 hover:from-red-500 hover:via-red-600 hover:to-red-500 text-white font-medium text-xs border border-red-400/20 shadow-[0_0_15px_rgba(220,38,38,0.2)] hover:shadow-[0_0_25px_rgba(220,38,38,0.4)] transition-all duration-300 tracking-wide overflow-hidden rounded-md backdrop-blur-sm"
             >
-              <span className="relative z-10">View Outbreak</span>
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-700" />
+              <span className="relative z-10 flex items-center gap-1.5">
+                <svg
+                  className="w-3 h-3 transition-transform duration-300 group-hover:scale-110"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
+                </svg>
+                VIEW OUTBREAK MAP
+              </span>
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-500 skew-x-12" />
             </Button>
           </Link>
           <Link href="/dashboard" className="w-full sm:w-auto">
             <Button
               size="lg"
               variant="outline"
-              className="group relative w-full sm:w-[200px] h-[52px] border-2 border-white/20 text-white font-semibold text-base rounded-full bg-transparent backdrop-blur-md transition-all duration-300 hover:bg-white/10 hover:border-white/40 hover:scale-105 overflow-hidden"
+              className="group relative w-full sm:w-[180px] h-10 border border-red-500/25 text-red-300 hover:text-red-200 hover:bg-red-950/30 hover:border-red-400/50 font-medium text-xs bg-black/50 backdrop-blur-xl transition-all duration-300 tracking-wide hover:shadow-[0_0_20px_rgba(220,38,38,0.25)] overflow-hidden rounded-md"
             >
-              <span className="relative z-10">Dashboard</span>
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-700" />
+              <span className="relative z-10 flex items-center gap-1.5">
+                <svg
+                  className="w-3 h-3 transition-transform duration-300 group-hover:rotate-12"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
+                  />
+                </svg>
+                YOUR DASHBOARD
+              </span>
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-red-500/10 to-transparent translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-500 skew-x-12" />
             </Button>
           </Link>
           <div className="w-full sm:w-auto">
-            <WalletConnectButton className="w-full sm:w-[200px] h-[52px] rounded-full font-semibold text-base" />
+            <WalletConnectButton className="group relative w-full sm:w-[180px] h-10 border border-red-500/25 text-red-300 hover:text-red-200 hover:bg-red-950/30 hover:border-red-400/50 font-medium text-xs bg-black/50 backdrop-blur-xl transition-all duration-300 tracking-wide hover:shadow-[0_0_20px_rgba(220,38,38,0.25)] rounded-md" />
           </div>
         </div>
 
         {/* Stats */}
         <div className="grid grid-cols-3 gap-3 md:gap-6 max-w-2xl mx-auto px-4">
           <div className="group relative rounded-xl border border-red-500/20 bg-gradient-to-br from-red-950/20 to-red-900/10 backdrop-blur-md p-4 transition-all duration-300 hover:border-red-500/40 hover:shadow-lg hover:shadow-red-600/20 hover:scale-105">
-            <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-red-500/0 to-red-500/0 group-hover:from-red-500/5 group-hover:to-red-500/10 transition-all duration-300" />
+            <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-red-500/0 to-red-500/0 group-hover:from-red-500/10 group-hover:to-red-500/5 transition-all duration-300" />
             <div className="relative">
               <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-red-400 font-mono mb-2">
                 {mounted && !isLoading ? <AnimatedCounter end={stats?.totalHolders || 0} duration={2500} /> : "0"}

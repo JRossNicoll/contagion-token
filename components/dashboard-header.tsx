@@ -5,41 +5,36 @@ import { WalletConnectButton } from "@/components/wallet-connect-button"
 
 export function DashboardHeader() {
   return (
-    <header className="border-b border-red-500/10 bg-black/98 backdrop-blur-xl shadow-2xl shadow-red-500/5">
-      <div className="px-3 md:px-6 py-3 md:py-4 flex items-center justify-between gap-2 md:gap-6">
-        <div className="flex items-center gap-2 md:gap-4 min-w-0 flex-1">
+    <header className="border-b border-white/5 bg-black/70 backdrop-blur-2xl shadow-[0_8px_32px_rgba(0,0,0,0.4)]">
+      <div className="px-6 py-5 flex items-center justify-between gap-6">
+        <div className="flex items-center gap-4 min-w-0 flex-1">
           <Link href="/">
             <Button
               size="sm"
               variant="outline"
-              className="border-zinc-800 bg-zinc-950/80 text-gray-400 hover:text-white hover:bg-zinc-900 hover:border-red-500/50 transition-all h-8 w-8 md:h-10 md:w-10 p-0 shadow-lg shrink-0"
+              className="border-white/10 bg-white/5 text-gray-400 hover:text-white hover:bg-white/10 hover:border-red-500/30 transition-all h-10 w-10 p-0 shadow-lg backdrop-blur-xl"
             >
-              <ArrowLeft className="w-3.5 h-3.5 md:w-4 md:h-4" />
+              <ArrowLeft className="w-4 h-4" />
             </Button>
           </Link>
           <div className="min-w-0 flex-1">
-            <h1 className="text-sm md:text-xl font-bold text-white font-mono tracking-tight leading-none truncate">
-              INFECTION STATUS
-            </h1>
-            <p className="text-[9px] md:text-xs text-red-400/60 font-mono tracking-wider mt-0.5 hidden sm:block uppercase truncate">
-              Track your spread and earn rewards
-            </p>
+            <h1 className="text-xl font-bold text-white tracking-tight leading-none">INFECTION STATUS</h1>
+            <p className="text-xs text-red-400/70 font-medium tracking-wide mt-1">Track your spread and earn rewards</p>
           </div>
         </div>
 
-        <div className="flex items-center gap-2 md:gap-3 shrink-0">
+        <div className="flex items-center gap-3 shrink-0">
           <Link href="/map">
             <Button
               size="sm"
               variant="outline"
-              className="h-8 px-3 md:h-10 md:px-5 border-zinc-800 bg-zinc-950/80 text-gray-400 hover:text-white hover:bg-zinc-900 hover:border-red-500/50 transition-all font-mono text-[10px] md:text-xs tracking-wider shadow-lg"
+              className="h-10 px-5 border-white/10 bg-white/5 text-gray-300 hover:text-white hover:bg-white/10 hover:border-red-500/30 transition-all font-medium backdrop-blur-xl shadow-lg"
             >
-              <span className="hidden sm:inline">VIEW MAP</span>
-              <span className="sm:hidden">MAP</span>
+              View Map
             </Button>
           </Link>
-          <div className="w-px h-6 md:h-8 bg-zinc-800/50 hidden sm:block" />
-          <WalletConnectButton className="h-8 md:h-10 text-[10px] md:text-xs" />
+          <div className="w-px h-8 bg-white/10" />
+          <WalletConnectButton className="h-10" />
         </div>
       </div>
     </header>

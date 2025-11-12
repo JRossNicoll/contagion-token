@@ -84,17 +84,17 @@ export function RewardsTiers() {
         {tiers.map((tier) => (
           <Card
             key={tier.name}
-            className="bg-zinc-950/80 border-zinc-800 p-6 relative overflow-hidden hover:border-zinc-700 transition-all"
+            className="bg-white/5 backdrop-blur-xl border-white/10 p-6 relative overflow-hidden hover:border-white/20 hover:bg-white/10 transition-all shadow-xl"
           >
             {tier.locked && (
-              <Badge className="absolute top-4 right-4 bg-zinc-900 text-gray-400 border-zinc-800 font-mono text-xs">
+              <Badge className="absolute top-4 right-4 bg-black/40 backdrop-blur-xl text-gray-400 border-white/10 font-mono text-xs">
                 <Lock className="w-3 h-3 mr-1" />
                 LOCKED
               </Badge>
             )}
 
             <div
-              className={`w-12 h-12 mb-4 rounded-lg ${tier.bgColor} flex items-center justify-center border border-zinc-800`}
+              className={`w-12 h-12 mb-4 rounded-xl ${tier.bgColor} flex items-center justify-center border ${tier.iconColor.replace("text-", "border-")}/30`}
             >
               <tier.icon className={`w-6 h-6 ${tier.iconColor}`} />
             </div>
@@ -104,7 +104,7 @@ export function RewardsTiers() {
 
             <div className="space-y-2 mb-4">
               <div className="flex items-center justify-between text-xs">
-                <span className="text-gray-400">Requirement</span>
+                <span className="text-gray-400 font-medium">Requirement</span>
                 <span className="text-white font-bold font-mono">{tier.requirement}</span>
               </div>
               <div className="text-xs text-gray-500 font-mono">{tier.progress}</div>
@@ -116,14 +116,14 @@ export function RewardsTiers() {
         ))}
       </div>
 
-      <Card className="mt-6 bg-gradient-to-br from-purple-950/30 to-black border-purple-500/30 p-8 text-center">
-        <Badge className="bg-red-950/50 text-red-400 border-red-500/30 mb-4 text-xs">CLASSIFIED</Badge>
+      <Card className="mt-6 bg-gradient-to-br from-purple-900/20 via-black/40 to-black/40 backdrop-blur-xl border-purple-500/20 p-8 text-center shadow-2xl">
+        <Badge className="bg-red-500/20 text-red-400 border-red-500/30 mb-4 text-xs backdrop-blur-sm">CLASSIFIED</Badge>
         <h3 className="text-2xl font-bold text-white mb-3">Mystery Airdrop Incoming</h3>
         <p className="text-gray-400 max-w-2xl mx-auto mb-2 text-sm leading-relaxed">
           Those who help contain this outbreak will be marked as "Patient Zeros" for the next viral token. Details will
           be revealed when the next strain is released.
         </p>
-        <p className="text-xs text-gray-600 italic font-mono">Stay infected. Stay rewarded.</p>
+        <p className="text-xs text-gray-500 italic font-mono">Stay infected. Stay rewarded.</p>
       </Card>
     </div>
   )

@@ -65,71 +65,69 @@ export function WalletStats() {
   return (
     <div>
       <div className="mb-6">
-        <h2 className="text-3xl font-bold text-white mb-1">Infection Overview</h2>
-        <p className="text-sm text-gray-500 mb-3">Your contribution to the outbreak</p>
-        <p className="text-xl text-white font-mono">
-          Balance:{" "}
-          {displayBalance.toLocaleString(undefined, {
-            maximumFractionDigits: 2,
-            minimumFractionDigits: 2,
-          })}{" "}
-          CONTAGION
-        </p>
+        <h2 className="text-3xl font-bold text-white mb-2">Infection Overview</h2>
+        <p className="text-sm text-gray-400 mb-4">Your contribution to the outbreak</p>
+        <div className="inline-flex items-center gap-3 px-5 py-3 rounded-xl bg-white/5 backdrop-blur-xl border border-white/10">
+          <span className="text-sm text-gray-400 font-medium">Balance:</span>
+          <span className="text-xl text-white font-mono font-semibold">
+            {displayBalance.toLocaleString(undefined, {
+              maximumFractionDigits: 2,
+              minimumFractionDigits: 2,
+            })}{" "}
+            <span className="text-red-400">CONTAGION</span>
+          </span>
+        </div>
       </div>
 
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <Card className="bg-zinc-950/80 border-zinc-800 p-5 hover:border-red-500/30 transition-all">
-          <div className="flex items-center gap-2 mb-4">
-            <div className="w-8 h-8 rounded-lg bg-red-950/50 flex items-center justify-center">
-              <Activity className="w-4 h-4 text-red-500" />
+        <Card className="bg-white/5 backdrop-blur-xl border-white/10 p-6 hover:border-red-500/30 hover:bg-white/10 transition-all shadow-xl">
+          <div className="flex items-center gap-3 mb-4">
+            <div className="w-10 h-10 rounded-xl bg-red-500/20 border border-red-500/30 flex items-center justify-center">
+              <Activity className="w-5 h-5 text-red-400" />
             </div>
-            <span className="text-xs text-gray-400 uppercase tracking-wider font-mono">Infected</span>
+            <span className="text-xs text-gray-400 uppercase tracking-wider font-semibold">Infected</span>
           </div>
-          <div className="text-4xl font-bold text-white mb-1 font-mono">{loading ? "..." : stats.walletsInfected}</div>
-          <div className="text-xs text-gray-500 mb-1">Wallets infected</div>
-          <div className="text-xs text-gray-600">From your interactions</div>
+          <div className="text-4xl font-bold text-white mb-2 font-mono">{loading ? "..." : stats.walletsInfected}</div>
+          <div className="text-xs text-gray-400 font-medium">Wallets infected</div>
         </Card>
 
-        <Card className="bg-zinc-950/80 border-zinc-800 p-5 hover:border-red-500/30 transition-all">
-          <div className="flex items-center gap-2 mb-4">
-            <div className="w-8 h-8 rounded-lg bg-red-950/50 flex items-center justify-center">
-              <TrendingUp className="w-4 h-4 text-red-500" />
+        <Card className="bg-white/5 backdrop-blur-xl border-white/10 p-6 hover:border-red-500/30 hover:bg-white/10 transition-all shadow-xl">
+          <div className="flex items-center gap-3 mb-4">
+            <div className="w-10 h-10 rounded-xl bg-red-500/20 border border-red-500/30 flex items-center justify-center">
+              <TrendingUp className="w-5 h-5 text-red-400" />
             </div>
-            <span className="text-xs text-gray-400 uppercase tracking-wider font-mono">Rate</span>
+            <span className="text-xs text-gray-400 uppercase tracking-wider font-semibold">Rate</span>
           </div>
-          <div className="text-4xl font-bold text-white mb-1 font-mono">
+          <div className="text-4xl font-bold text-white mb-2 font-mono">
             {loading ? "..." : `${stats.spreadRate.toFixed(1)}x`}
           </div>
-          <div className="text-xs text-gray-500 mb-1">Spread Rate</div>
-          <div className="text-xs text-gray-600">Average</div>
+          <div className="text-xs text-gray-400 font-medium">Spread Rate</div>
         </Card>
 
-        <Card className="bg-zinc-950/80 border-zinc-800 p-5 hover:border-red-500/30 transition-all">
-          <div className="flex items-center gap-2 mb-4">
-            <div className="w-8 h-8 rounded-lg bg-orange-950/50 flex items-center justify-center">
-              <Flame className="w-4 h-4 text-orange-500" />
+        <Card className="bg-white/5 backdrop-blur-xl border-white/10 p-6 hover:border-orange-500/30 hover:bg-white/10 transition-all shadow-xl">
+          <div className="flex items-center gap-3 mb-4">
+            <div className="w-10 h-10 rounded-xl bg-orange-500/20 border border-orange-500/30 flex items-center justify-center">
+              <Flame className="w-5 h-5 text-orange-400" />
             </div>
-            <span className="text-xs text-gray-400 uppercase tracking-wider font-mono">Burned</span>
+            <span className="text-xs text-gray-400 uppercase tracking-wider font-semibold">Burned</span>
           </div>
-          <div className="text-4xl font-bold text-white mb-1 font-mono">
+          <div className="text-4xl font-bold text-white mb-2 font-mono">
             {loading ? "..." : stats.tokensBurned.toLocaleString()}
           </div>
-          <div className="text-xs text-gray-500 mb-1">Tokens Burned</div>
-          <div className="text-xs text-gray-600">Not vaccinated</div>
+          <div className="text-xs text-gray-400 font-medium">Tokens Burned</div>
         </Card>
 
-        <Card className="bg-zinc-950/80 border-zinc-800 p-5 hover:border-red-500/30 transition-all">
-          <div className="flex items-center gap-2 mb-4">
-            <div className="w-8 h-8 rounded-lg bg-yellow-950/50 flex items-center justify-center">
-              <Trophy className="w-4 h-4 text-yellow-500" />
+        <Card className="bg-white/5 backdrop-blur-xl border-white/10 p-6 hover:border-yellow-500/30 hover:bg-white/10 transition-all shadow-xl">
+          <div className="flex items-center gap-3 mb-4">
+            <div className="w-10 h-10 rounded-xl bg-yellow-500/20 border border-yellow-500/30 flex items-center justify-center">
+              <Trophy className="w-5 h-5 text-yellow-400" />
             </div>
-            <span className="text-xs text-gray-400 uppercase tracking-wider font-mono">Rank</span>
+            <span className="text-xs text-gray-400 uppercase tracking-wider font-semibold">Rank</span>
           </div>
-          <div className="text-4xl font-bold text-white mb-1 font-mono">
+          <div className="text-4xl font-bold text-white mb-2 font-mono">
             {loading ? "..." : stats.globalRank > 0 ? `#${stats.globalRank}` : "#0"}
           </div>
-          <div className="text-xs text-gray-500 mb-1">Global Rank</div>
-          <div className="text-xs text-green-400">{loading ? "Calculating..." : "Live"}</div>
+          <div className="text-xs text-gray-400 font-medium">Global Rank</div>
         </Card>
       </div>
     </div>

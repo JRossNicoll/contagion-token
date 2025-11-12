@@ -67,14 +67,14 @@ export function InfectionTimeline() {
   const getInfectionCount = (index: number) => timeline.length - index
 
   return (
-    <Card className="bg-zinc-950/80 border-zinc-800 p-6">
+    <Card className="bg-white/5 backdrop-blur-xl border-white/10 p-6 shadow-xl">
       <h3 className="text-xl font-bold text-white mb-6">Infection Timeline</h3>
 
-      <div className="space-y-3 max-h-[400px] overflow-y-auto pr-2">
+      <div className="space-y-3 max-h-[400px] overflow-y-auto pr-2 custom-scrollbar">
         {loading ? (
           <div className="text-center py-12">
             <div className="w-12 h-12 border-4 border-red-500 border-t-transparent rounded-full animate-spin mx-auto mb-3" />
-            <p className="text-gray-500 text-sm">Loading infections...</p>
+            <p className="text-gray-400 text-sm">Loading infections...</p>
           </div>
         ) : timeline.length > 0 ? (
           timeline.map((entry, i) => {
@@ -84,15 +84,17 @@ export function InfectionTimeline() {
             return (
               <div
                 key={entry.transaction_hash}
-                className="flex items-center justify-between p-4 bg-black/50 border border-zinc-800 rounded-lg hover:border-red-500/30 transition-all"
+                className="flex items-center justify-between p-4 bg-black/40 backdrop-blur-sm border border-white/10 rounded-lg hover:border-red-500/30 hover:bg-white/5 transition-all"
               >
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2 mb-1">
-                    <span className="font-mono text-sm text-white truncate">{formatAddress(entry.to_address)}</span>
+                    <span className="font-mono text-sm text-white font-medium truncate">
+                      {formatAddress(entry.to_address)}
+                    </span>
                     {isChainReaction && (
-                      <Badge variant="destructive" className="text-xs font-mono px-2 py-0">
+                      <Badge variant="destructive" className="text-xs font-mono px-2 py-0.5">
                         <Zap className="w-3 h-3 mr-1" />
-                        CHAIN REACTION
+                        CHAIN
                       </Badge>
                     )}
                   </div>
@@ -100,7 +102,7 @@ export function InfectionTimeline() {
                 </div>
 
                 <div className="flex items-center gap-3 ml-4">
-                  <div className="flex items-center gap-1">
+                  <div className="flex items-center gap-1.5">
                     <span className="text-red-400 font-bold font-mono text-lg">{getInfectionCount(i)}</span>
                     <span className="text-xs text-gray-500">infected</span>
                   </div>
@@ -111,8 +113,8 @@ export function InfectionTimeline() {
         ) : (
           <div className="text-center py-16">
             <Activity className="w-16 h-16 mx-auto mb-3 text-gray-700 opacity-30" />
-            <p className="text-gray-500 text-base mb-1">No infections yet</p>
-            <p className="text-gray-600 text-sm">Start spreading the virus!</p>
+            <p className="text-gray-400 text-base mb-1">No infections yet</p>
+            <p className="text-gray-500 text-sm">Start spreading the virus!</p>
           </div>
         )}
       </div>
